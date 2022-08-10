@@ -37,4 +37,20 @@
     - define function `createUser` and pass value input
     - define new error
 
-15. create `schema` folder and inside folder will create file `user.schema.ts`
+15. create `schema` folder and inside folder will create file `user.schema.ts` the difinition for our payload so if have a look at middleware
+
+    - define constant `createUserSchema`
+    - check password gether more then 6 chars
+    - check email is valid or not ?
+    - dot refine is to take callback and the argument data for compare password and to give an error message
+    - create export type `CreateUserInput` and implement interface `typeof createUserSchema`
+
+16. let's go to `routes.ts` for use this middleware
+
+    - import `validateResource` from a middleware that take schema `createUserSchema` from `user.schema.ts` you should see `app.post("/api/users", validateResource(createUserSchema), createUserHandler);`
+
+17. let's go to `user.service.ts` because interface don't match createdat and updateat you should see`Omit<UserDocument, "createdAt" | "updatetAt" | "comparePassword">`
+
+18. let's go to `user.controller.ts` have a look at `Req:Request` then take hover the `Req:Request` and pass generic `CreateUserInput['body']` in params of `Req:Request`
+
+19. let's go to `user.schema.ts` add Omit to `CreateUserInput` for compare password from CreateUserInput pass generic `"body.passwordConfirmation"`
