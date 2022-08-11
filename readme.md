@@ -73,7 +73,7 @@
     - rename inside userSchema from `email` to `user` and change type from `String` to `mongoose.Schema.types.ObjectId`
     - rename inside userSchema from `name` to `valid` and change type from `String` to `boolean`
     - remove `password` inside userSchema
-    - you should have a look at interface `UserDocument` rename to `SchemaDocement` and inside interface change from `email` to `user` and change type from `string` to `UserDocument["_id"]` then delete `password`
+    - you should have a look at interface `UserDocument` rename to `SessionDocement` and inside interface change from `email` to `user` and change type from `string` to `UserDocument["_id"]` then delete `password`
     - inside `sessionSchema` add `userAgent` define type `String` and add to interface `SchemaDocement`
 
 24. let's go to `service` folder and create new file `session.service.ts`
@@ -105,4 +105,5 @@
       5. return access & refresh tokens
 
 26. let's go to `routes.ts` for implement route of `/api/session` and use middleware
-    - create file inside schema of session api `session.schema.ts`
+    - create file inside schema of session api `session.schema.ts` for middleware
+    - import `zod` and create constant `createUserSessionSchema`
