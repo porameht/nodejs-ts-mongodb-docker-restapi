@@ -1,3 +1,5 @@
+> user handler
+
 1. initial porject create package.json file `npm init -y`
 
 2. install dependencies `npm install express zod config cors express mongoose pino pino-pretty dayjs bcrypt jsonwebtoken lodash nanoid`
@@ -26,6 +28,7 @@
     - define export interface `UserDocument`
     - define `userSchema.pre` for check that password is modified or not?
     - compare password method `userSchema.methods.comparePassword`
+    - have a look at `UserModel` add interface `<UserDocument>` to constant
 
 13. create `controller` folder and inside controller will create file `user.controller.ts`
 
@@ -54,3 +57,52 @@
 18. let's go to `user.controller.ts` have a look at `Req:Request` then take hover the `Req:Request` and pass generic `CreateUserInput['body']` in params of `Req:Request`
 
 19. let's go to `user.schema.ts` add Omit to `CreateUserInput` for compare password from CreateUserInput pass generic `"body.passwordConfirmation"`
+
+20. let's go to `app.ts` and get middleware then add `app.use(express.json);` and check validateResource that have `next()` or not ?
+
+21. test api of route `http://localhost:1337/api/users` by postman result is OK status 200
+
+22. let's go to `user.controller.ts` import `import omit from 'lodash'` and add to return for convert user to JSON object then password will is not response you should see `return res.send(omit(user.toJSON(), "password"));`
+
+> session handler
+
+23. let's go to folder `models` and create new file `session.model.ts` then copy file `user.model.ts` to file `session.model.ts`
+
+    - rename from variable `user` to `session`
+    - remove compare password and pre-save hook
+    - rename inside userSchema from `email` to `user` and change type from `String` to `mongoose.Schema.types.ObjectId`
+    - rename inside userSchema from `name` to `valid` and change type from `String` to `boolean`
+    - remove `password` inside userSchema
+    - you should have a look at interface `UserDocument` rename to `SchemaDocement` and inside interface change from `email` to `user` and change type from `string` to `UserDocument["_id"]` then delete `password`
+    - inside `sessionSchema` add `userAgent` define type `String` and add to interface `SchemaDocement`
+
+24. let's go to `service` folder and create new file `session.service.ts`
+
+    - import `SessionModel` from `session.model` for implement in this file
+    - export function `createSession` and create sessionModel
+
+25. let's go to `controller` folder and create new file `session.controller.ts`
+
+    - export function `createUserSessionHandler`
+    - let's go to `user.service.ts` for create export function `validatePassword()` this function can check an email or password if the password is correct to return user object else return false
+    - import `validatePassword()` from `user.service.ts`
+
+    - create method
+
+      1. validate the user's password
+      2. create a session
+      3. create an access token
+
+         - let's go to `utils` then create new file `jwt.utils.ts`
+         - import `import jwt from "jsonwebtoken"`
+         - import `import config from "config"` and going to assign the jwt with a private key for varify private key with a public key generate by `https://travistidwell.com/jsencrypt/demo/`
+         - create function `signJwt()` and function `verifyJwt()` then implement those both
+         - define constant `accessToken`
+         - assign access time to leave `accessTokenTtl` in `default.ts`
+         - assign refresh time to leave `refreshTokenTtl` in `default.ts`
+
+      4. create a refresh token
+      5. return access & refresh tokens
+
+26. let's go to `routes.ts` for implement route of `/api/session` and use middleware
+    - create file inside schema of session api `session.schema.ts`
