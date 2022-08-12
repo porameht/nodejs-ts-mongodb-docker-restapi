@@ -81,9 +81,8 @@
     - import `SessionModel` from `session.model` for implement in this file
     - export function `createSession` and create sessionModel
 
-25. let's go to `controller` folder and create new file `session.controller.ts`
+25. let's go to `controller` folder and create new file `session.controller.ts` for export function `createUserSessionHandler`
 
-    - export function `createUserSessionHandler`
     - let's go to `user.service.ts` for create export function `validatePassword()` this function can check an email or password if the password is correct to return user object else return false
     - import `validatePassword()` from `user.service.ts`
 
@@ -105,5 +104,37 @@
       5. return access & refresh tokens
 
 26. let's go to `routes.ts` for implement route of `/api/session` and use middleware
+
     - create file inside schema of session api `session.schema.ts` for middleware
-    - import `zod` and create constant `createUserSessionSchema`
+    - import `zod` and create constant `createSessionSchema`
+
+    - third route for getting method GET all sessions user in `routes.ts` file, create route `/api/sessions`
+    - then pass function `getUserSessionHandler` this new function will create inside file `session.controller.ts`
+
+      1. create async function `findSessions` in file `session.service.ts` return `SessionModel`
+      2. import `SessionDocement` from `session.service.ts` for implement interface
+      3. import `FilterQuery` from `import { FilterQuery } from "mongoose";`
+
+    - create middleware inside folder `middleware` call file `deserializeUser.ts`
+
+      1. create function `deserializeUser` within this function define `accessToken`
+      2. import `verifyJwt` from `jwt.utils.ts`
+
+    - comeback to `session.controller.ts` and implement function `getUserSessionHandler` then import to file `route.ts`
+    - let's go to `app.ts` for define use middleware `app.use(deserializeUser)`
+
+    - let's go to `middleware` folder inside will create file `requireUser.ts` for make sure that user require
+      1. create function `requireUser`
+      2. go to `route.ts` import and pass `requireUser` to `app.use(deserializeUser)`
+      3. test GET method `/api/sessions` by postman again
+
+27. let's go to `controller` folder and create new file `session.controller.ts` for export function `deleteSessionHandler` for delete session
+
+    - comeback to `session.service.ts` then define export async function `updateSession`
+    - comeback to `session.controller.ts` import `updateSession`
+    - go to `routes` import `deleteSessionHandler` and create route `app.delete`
+
+28. let's go to `deserializeUser.ts` for create middleware refresh token `const refreshToken` then define condition `if (expired && refreshToken)`
+
+    - let's go to `session.service.ts` for create export async function `reIssueAccessToken()` and implement
+    - let's go to `user.service.ts` then define export async function `findUser()` 
