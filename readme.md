@@ -1,4 +1,4 @@
-> user handler
+**_user handler_**
 
 1. initial porject create package.json file `npm init -y`
 
@@ -64,7 +64,7 @@
 
 22. let's go to `user.controller.ts` import `import omit from 'lodash'` and add to return for convert user to JSON object then password will is not response you should see `return res.send(omit(user.toJSON(), "password"));`
 
-> session handler
+**_session handler_**
 
 23. let's go to folder `models` and create new file `session.model.ts` then copy file `user.model.ts` to file `session.model.ts`
 
@@ -137,4 +137,14 @@
 28. let's go to `deserializeUser.ts` for create middleware refresh token `const refreshToken` then define condition `if (expired && refreshToken)`
 
     - let's go to `session.service.ts` for create export async function `reIssueAccessToken()` and implement
-    - let's go to `user.service.ts` then define export async function `findUser()` 
+    - let's go to `user.service.ts` then define export async function `findUser()`
+
+**_product_**
+
+29. let's come into `service` folder then create new file `product.service.ts`
+
+30. let's go to `models` folder and create new file `product.model.ts`
+    - then copy code inside file `session.model.ts`
+    - import `customAlphabet` from `nanoid`
+    - change name interface from `SessionDocement` to `ProductDocument` and change variable name
+    - change constant name from `sessionSchema` to `productSchema`
