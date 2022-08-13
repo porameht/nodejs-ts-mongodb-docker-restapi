@@ -144,7 +144,26 @@
 29. let's come into `service` folder then create new file `product.service.ts`
 
 30. let's go to `models` folder and create new file `product.model.ts`
+
     - then copy code inside file `session.model.ts`
     - import `customAlphabet` from `nanoid`
     - change name interface from `SessionDocement` to `ProductDocument` and change variable name
     - change constant name from `sessionSchema` to `productSchema`
+    - comeback to `product.service.ts`
+      1. creating service `createProduct()`
+      2. creating service `findProduct()`
+      3. creating service `findAndUpdateProduct()`
+      4. creating service `deleteProduct()`
+
+31. let's go to `controller` folder then inside creating new file `product.controller.ts`
+
+    1. create function `createProductHandler`
+    2. create function `updateProductHandler`
+    3. create function `getProductHandler`
+    4. create function `deleteProductHandler`
+
+32. let's go to `schema` folder then inside folder creating new file `product.schema.ts`
+
+    - import `{object,number,string,TypeOf}` from `zod`
+    - create constant `payload`
+    - create constant `params`
