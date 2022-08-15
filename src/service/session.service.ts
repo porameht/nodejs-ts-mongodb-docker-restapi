@@ -35,7 +35,6 @@ export async function reIssueAccessToken({
 
   if (!session || !session.valid) return false;
 
-  // findUser import from user.service.ts
   const user = await findUser({ _id: session.user });
 
   if (!user) return false;

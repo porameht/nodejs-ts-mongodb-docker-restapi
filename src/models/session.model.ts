@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-
-import { NextFunction } from "express";
 import { UserDocument } from "./user.model";
 
 export interface SessionDocument extends mongoose.Document {
@@ -23,4 +21,5 @@ const sessionSchema = new mongoose.Schema(
 );
 
 const SessionModel = mongoose.model<SessionDocument>("Session", sessionSchema);
+
 export default SessionModel;

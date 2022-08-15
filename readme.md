@@ -157,13 +157,30 @@
 
 31. let's go to `controller` folder then inside creating new file `product.controller.ts`
 
-    1. create function `createProductHandler`
-    2. create function `updateProductHandler`
-    3. create function `getProductHandler`
-    4. create function `deleteProductHandler`
+    1. create export async function `createProductHandler`
+    2. create export async function `updateProductHandler`
+    3. create export async function `getProductHandler`
+    4. create export async function `deleteProductHandler`
 
 32. let's go to `schema` folder then inside folder creating new file `product.schema.ts`
 
-    - import `{object,number,string,TypeOf}` from `zod`
-    - create constant `payload`
-    - create constant `params`
+    1. import `{object,number,string,TypeOf}` from `zod`
+    2. create constant `payload`
+    3. create constant `params`
+    4. create export constant `createProductSchema`
+    5. create export constant `updateProductSchema`
+    6. create export constant `deleteProductSchema`
+    7. create export constant `getProductSchema`
+    8. export all const and ues typeOf
+
+33. comeback to `controller` file name `product.controller.ts`
+
+    1. import `createProductInput` and pass to Request parameter of function `createProductHandler`
+    2. import `updateProductInput` and pass to Request of 3 function
+    3. implement all function
+
+34. comeback to `routes` and create route of products
+    1. create post method `/api/products`
+    2. create put method `/api/products/:productId`
+    3. create get method `/api/products/:productId`
+    4. create delete method `/api/products/:productId`
