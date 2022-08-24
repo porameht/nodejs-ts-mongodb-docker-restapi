@@ -184,3 +184,8 @@
     2. create put method `/api/products/:productId`
     3. create get method `/api/products/:productId`
     4. create delete method `/api/products/:productId`
+    
+![data-flow](https://user-images.githubusercontent.com/89307294/186391532-5c6c5322-06ad-46b4-92f2-81b50f7b2d55.png)
+
+![refresh-token-flow](https://user-images.githubusercontent.com/89307294/186391544-f1a87b43-bcad-47d1-b09f-19e5d0f32660.png)
+
